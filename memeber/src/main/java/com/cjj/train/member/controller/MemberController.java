@@ -13,7 +13,7 @@ public class MemberController {
     @Autowired
     public MemberService memberService;
     @GetMapping("/count")
-    public Integer count() {
+    public int count() {
         return memberService.count();
     }
 }
