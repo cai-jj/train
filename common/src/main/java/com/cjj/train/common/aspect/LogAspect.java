@@ -1,4 +1,4 @@
-package com.cjj.train.member.aop;
+package com.cjj.train.common.aspect;
 
 import com.alibaba.fastjson.JSONObject;
 import com.alibaba.fastjson.support.spring.PropertyPreFilters;
