@@ -1,0 +1,6 @@
+
+#启动路径前缀，方便路由转发
+server:
+  servlet:
+    context-path: /member
+  port: 8001
