@@ -39,16 +39,11 @@ public class JwtUtil {
     }
 
     public static boolean validate(String token) {
-        try {
-            JWT jwt = JWTUtil.parseToken(token).setKey(key.getBytes());
-            // validate包含了verify
-            boolean validate = jwt.validate(0);
-            LOG.info("JWT token校验结果：{}", validate);
-            return validate;
-        } catch (Exception e) {
-            LOG.error("JWT token校验异常", e);
-            return false;
-        }
+        JWT jwt = JWTUtil.parseToken(token).setKey(key.getBytes());
+        // validate包含了verify
+        boolean validate = jwt.validate(0);
+        LOG.info("JWT token校验结果：{}", validate);
+        return validate;
     }
 
     public static JSONObject getJSONObject(String token) {
@@ -64,7 +59,7 @@ public class JwtUtil {
     public static void main(String[] args) {
         createToken(1L, "123");
 
-        String token = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJuYmYiOjE2NzY4OTk4MjcsIm1vYmlsZSI6IjEyMyIsImlkIjoxLCJleHAiOjE2NzY4OTk4MzcsImlhdCI6MTY3Njg5OTgyN30.JbFfdeNHhxKhAeag63kifw9pgYhnNXISJM5bL6hM8eU";
+        String token = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJuYmYiOjE3MDQzNTY2OTgsIm1vYmlsZSI6IjEyMyIsImlkIjoxLCJleHAiOjE3MDQ0NDMwOTgsImlhdCI6MTcwNDM1NjY5OH0._6_-OuKyFpAnG55bOvz-V3EDCVajYl8cTCQ3PRBhZHU";
         validate(token);
 
         getJSONObject(token);
