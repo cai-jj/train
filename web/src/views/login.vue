@@ -55,22 +55,21 @@ export default defineComponent({
     });
 
     const sendCode = () => {
-      axios.post("http://localhost:8080/member/member/sendCode", {
+      axios.post("/member/member/sendCode", {
         mobile: loginForm.mobile
       }).then(response => {
-        console.log(response);
-        // let data = response.data;
-        // if (data.success) {
-        //   notification.success({ description: '发送验证码成功！' });
-        //   loginForm.code = "8888";
-        // } else {
-        //   notification.error({ description: data.message });
-        // }
+        let data = response.data;
+        if (data.success) {
+          notification.success({ description: '发送验证码成功！' });
+          loginForm.code = "8888";
+        } else {
+          notification.error({ description: data.message });
+        }
       });
     };
 
     const login = () => {
-      axios.post("http://localhost:8080/member/member/login", loginForm).then((response) => {
+      axios.post("/member/member/login", loginForm).then((response) => {
         let data = response.data;
         if (data.success) {
           notification.success({ description: '登录成功！' });
