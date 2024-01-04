@@ -7,6 +7,7 @@ import cn.hutool.core.util.RandomUtil;
 import cn.hutool.log.Log;
 import com.cjj.train.common.exception.BusinessException;
 import com.cjj.train.common.exception.BusinessExceptionEnum;
+import com.cjj.train.common.util.JwtUtil;
 import com.cjj.train.common.util.SnowUtil;
 import com.cjj.train.member.domain.Member;
 import com.cjj.train.member.domain.MemberExample;
@@ -89,6 +90,7 @@ public class MemberService {
             throw new BusinessException(BusinessExceptionEnum.MEMBER_MOBILE_CODE_ERROR);
         }
         MemberLoginResp memberLoginResp = BeanUtil.copyProperties(memberDB, MemberLoginResp.class);
+        memberLoginResp.setToken(JwtUtil.createToken(memberLoginResp.getId(), memberLoginResp.getMobile()));
         return memberLoginResp;
 
 

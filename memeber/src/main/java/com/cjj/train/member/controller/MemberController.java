@@ -25,7 +25,7 @@ public class MemberController {
 
     //注册用户
     @PostMapping("/register")
-    public CommonResp<Long> register(@Valid MemberRegisterReq memberRegisterReq) {
+    public CommonResp<Long> register(@Valid @RequestBody MemberRegisterReq memberRegisterReq) {
 //        long mobile = memberService.register(memberRegisterReq);
 //        CommonResp<Long> commonResp = new CommonResp<>();
 //        commonResp.setContent(mobile);
