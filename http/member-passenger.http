@@ -5,8 +5,10 @@ token:eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJuYmYiOjE3MDQ0Mzc5OTMsIm1vYmlsZSI6I
 {
   "name": "test",
   "idCard": "1234321",
-  "type": "1"
+  "type": "2"
 }
+
+
 
 ###
 POST http://localhost:8000/member/passenger/save
@@ -23,9 +25,9 @@ token: {{token}}
 
 ###
 
-GET http://localhost:8000/member/passenger/query-list?page=1&size=10
+GET http://localhost:8000/member/passenger/query-list
 Accept: application/json
-token: {{token}}
+token: eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJuYmYiOjE3MDQ0Mzc5OTMsIm1vYmlsZSI6IjEzMDAwMDAwMDAxIiwiaWQiOjE3NDI4Mjc1MDk4MTg0NjIyMDgsImV4cCI6MTcwNDUyNDM5MywiaWF0IjoxNzA0NDM3OTkzfQ.TsvOW77bbN_z8DoVOxhNkI3UHSYsizU3WowmkNN3lEM
 
 ###
 
