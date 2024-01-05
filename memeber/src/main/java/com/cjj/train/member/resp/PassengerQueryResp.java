@@ -1,12 +1,13 @@
 package com.cjj.train.member.resp;
 
+import com.cjj.train.common.req.PageReq;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
 
 import java.util.Date;
 
-public class PassengerQueryResp {
+public class PassengerQueryResp{
 
     /**
      * id
