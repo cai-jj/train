@@ -3,6 +3,7 @@ package com.cjj.train.member.service;
 import cn.hutool.core.bean.BeanUtil;
 import cn.hutool.core.date.DateTime;
 import cn.hutool.core.util.ObjectUtil;
+import com.cjj.train.common.context.LoginMemberContext;
 import com.cjj.train.common.util.SnowUtil;
 import com.cjj.train.member.domain.Passenger;
 import com.cjj.train.member.mapper.PassengerMapper;
@@ -18,6 +19,7 @@ public class PassengerService {
     public void save(PassengerSaveReq passengerSaveReq) {
         Passenger passenger = BeanUtil.copyProperties(passengerSaveReq, Passenger.class);
         DateTime now = DateTime.now();
+        passenger.setMemberId(LoginMemberContext.getId());
         //雪花算法生成id
         passenger.setId(SnowUtil.getSnowflakeNextId());
         passenger.setCreateTime(now);
