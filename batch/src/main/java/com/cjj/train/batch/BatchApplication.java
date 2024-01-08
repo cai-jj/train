@@ -1,4 +1,4 @@
-package com.cjj.tain.batch;
+package com.cjj.train.batch;
 
 import org.mybatis.spring.annotation.MapperScan;
 import org.slf4j.Logger;
