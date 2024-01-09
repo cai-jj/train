@@ -95,6 +95,8 @@ public class DailyTrainSeatService {
                 .andTrainCodeEqualTo(trainCode);
         dailyTrainSeatMapper.deleteByExample(dailyTrainSeatExample);
 
+        //哪些站的座位售卖情况
+        //先要查出有几个车站 0000表示4个站，每个站之间都是可卖的票
         List<TrainStation> stationList = trainStationService.selectByTrainCode(trainCode);
         String sell = StrUtil.fillBefore("", '0', stationList.size() - 1);
 

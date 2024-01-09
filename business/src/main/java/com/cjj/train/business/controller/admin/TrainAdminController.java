@@ -3,6 +3,7 @@ package com.cjj.train.business.controller.admin;
 import com.cjj.train.business.req.TrainQueryReq;
 import com.cjj.train.business.req.TrainSaveReq;
 import com.cjj.train.business.resp.TrainQueryResp;
+import com.cjj.train.business.service.TrainSeatService;
 import com.cjj.train.business.service.TrainService;
 import com.cjj.train.common.resp.CommonResp;
 import com.cjj.train.common.resp.PageResp;
@@ -18,6 +19,9 @@ public class TrainAdminController {
 
     @Resource
     private TrainService trainService;
+
+    @Resource
+    private TrainSeatService trainSeatService;
 
 
     @PostMapping("/save")
@@ -46,7 +50,7 @@ public class TrainAdminController {
 
     @GetMapping("/gen-seat/{trainCode}")
     public CommonResp<Object> genSeat(@PathVariable("trainCode") String trainCode) {
-        trainService.genTrainSeat(trainCode);
+        trainSeatService.genTrainSeat(trainCode);
         return new CommonResp<>();
     }
 
