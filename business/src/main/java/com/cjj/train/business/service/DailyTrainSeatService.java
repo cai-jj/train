@@ -120,6 +120,8 @@ public class DailyTrainSeatService {
         LOG.info("生成日期【{}】车次【{}】的座位信息结束", DateUtil.formatDate(date), trainCode);
     }
 
+
+    //查询某个车次某天的某种类型的座位数量
     public int countSeat(Date date, String trainCode, String seatType) {
         DailyTrainSeatExample example = new DailyTrainSeatExample();
         example.createCriteria()
@@ -127,6 +129,7 @@ public class DailyTrainSeatService {
                 .andTrainCodeEqualTo(trainCode)
                 .andSeatTypeEqualTo(seatType);
         long l = dailyTrainSeatMapper.countByExample(example);
+        //因为这个是我们手动生成的车票信息，如果这个类型的座位数量为0，表示这个列车没有这种类型的座位，返回-1
         if (l == 0L) {
             return -1;
         }

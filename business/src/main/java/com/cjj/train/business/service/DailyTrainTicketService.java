@@ -118,6 +118,7 @@ public class DailyTrainTicketService {
 
         DateTime now = DateTime.now();
         for (int i = 0; i < stationList.size(); i++) {
+            //ABCDE 五个站 起始站A终点站E，遍历所以经过车站的可能AB AC AD AE BC BD BE CD CE DE
             // 得到出发站
             TrainStation trainStationStart = stationList.get(i);
             BigDecimal sumKM = BigDecimal.ZERO;
@@ -137,10 +138,15 @@ public class DailyTrainTicketService {
                 dailyTrainTicket.setEndPinyin(trainStationEnd.getNamePinyin());
                 dailyTrainTicket.setEndTime(trainStationEnd.getInTime());
                 dailyTrainTicket.setEndIndex(trainStationEnd.getIndex());
+
                 int ydz = dailyTrainSeatService.countSeat(date, trainCode, SeatTypeEnum.YDZ.getCode());
+                LOG.info("一等座数量为{}", ydz);
                 int edz = dailyTrainSeatService.countSeat(date, trainCode, SeatTypeEnum.EDZ.getCode());
+                LOG.info("二等座数量为{}", edz);
                 int rw = dailyTrainSeatService.countSeat(date, trainCode, SeatTypeEnum.RW.getCode());
+                LOG.info("软卧数量为{}", rw);
                 int yw = dailyTrainSeatService.countSeat(date, trainCode, SeatTypeEnum.YW.getCode());
+                LOG.info("硬卧卧数量为{}", yw);
                 // 票价 = 里程之和 * 座位单价 * 车次类型系数
                 String trainType = dailyTrain.getType();
                 // 计算票价系数：TrainTypeEnum.priceRate
