@@ -75,4 +75,12 @@ public class PassengerService {
     public void deleteById(Long id) {
         passengerMapper.deleteByPrimaryKey(id);
     }
+
+    public List<Passenger> queryMine() {
+        Long memberId = LoginMemberContext.getId();
+        PassengerExample example = new PassengerExample();
+        example.createCriteria().andMemberIdEqualTo(memberId);
+        List<Passenger> passengerList = passengerMapper.selectByExample(example);
+        return passengerList;
+    }
 }

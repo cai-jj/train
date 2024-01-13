@@ -6,10 +6,7 @@ import cn.hutool.core.date.DateTime;
 import cn.hutool.core.date.DateUtil;
 import cn.hutool.core.util.ObjectUtil;
 import cn.hutool.core.util.StrUtil;
-import com.cjj.train.business.domain.DailyTrainSeat;
-import com.cjj.train.business.domain.DailyTrainSeatExample;
-import com.cjj.train.business.domain.TrainSeat;
-import com.cjj.train.business.domain.TrainStation;
+import com.cjj.train.business.domain.*;
 import com.cjj.train.business.mapper.DailyTrainSeatMapper;
 import com.cjj.train.business.req.DailyTrainSeatQueryReq;
 import com.cjj.train.business.req.DailyTrainSeatSaveReq;
@@ -134,5 +131,16 @@ public class DailyTrainSeatService {
             return -1;
         }
         return (int) l;
+    }
+
+    //根据车厢查询所有的座位
+    public List<DailyTrainSeat> selectByCarriage(Date date, String trainCode, Integer carriageIndex) {
+        DailyTrainSeatExample example = new DailyTrainSeatExample();
+        example.setOrderByClause("carriage_seat_index asc");
+        example.createCriteria().andDateEqualTo(date)
+                .andTrainCodeEqualTo(trainCode)
+                .andCarriageIndexEqualTo(carriageIndex);
+        List<DailyTrainSeat> list = dailyTrainSeatMapper.selectByExample(example);
+        return list;
     }
 }

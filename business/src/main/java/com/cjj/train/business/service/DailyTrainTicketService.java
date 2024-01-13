@@ -7,10 +7,7 @@ import cn.hutool.core.date.DateUtil;
 import cn.hutool.core.util.EnumUtil;
 import cn.hutool.core.util.ObjUtil;
 import cn.hutool.core.util.ObjectUtil;
-import com.cjj.train.business.domain.DailyTrain;
-import com.cjj.train.business.domain.DailyTrainTicket;
-import com.cjj.train.business.domain.DailyTrainTicketExample;
-import com.cjj.train.business.domain.TrainStation;
+import com.cjj.train.business.domain.*;
 import com.cjj.train.business.enums.SeatTypeEnum;
 import com.cjj.train.business.enums.TrainTypeEnum;
 import com.cjj.train.business.mapper.DailyTrainTicketMapper;
@@ -140,13 +137,9 @@ public class DailyTrainTicketService {
                 dailyTrainTicket.setEndIndex(trainStationEnd.getIndex());
 
                 int ydz = dailyTrainSeatService.countSeat(date, trainCode, SeatTypeEnum.YDZ.getCode());
-                LOG.info("一等座数量为{}", ydz);
                 int edz = dailyTrainSeatService.countSeat(date, trainCode, SeatTypeEnum.EDZ.getCode());
-                LOG.info("二等座数量为{}", edz);
                 int rw = dailyTrainSeatService.countSeat(date, trainCode, SeatTypeEnum.RW.getCode());
-                LOG.info("软卧数量为{}", rw);
                 int yw = dailyTrainSeatService.countSeat(date, trainCode, SeatTypeEnum.YW.getCode());
-                LOG.info("硬卧卧数量为{}", yw);
                 // 票价 = 里程之和 * 座位单价 * 车次类型系数
                 String trainType = dailyTrain.getType();
                 // 计算票价系数：TrainTypeEnum.priceRate
@@ -170,5 +163,20 @@ public class DailyTrainTicketService {
         }
         LOG.info("生成日期【{}】车次【{}】的余票信息结束", DateUtil.formatDate(date), trainCode);
 
+    }
+
+    public DailyTrainTicket selectByUnique(Date date, String trainCode,
+                                           String start, String end) {
+        DailyTrainTicketExample example = new DailyTrainTicketExample();
+        example.createCriteria().andDateEqualTo(date)
+                .andTrainCodeEqualTo(trainCode)
+                .andStartEqualTo(start)
+                .andEndEqualTo(end);
+        List<DailyTrainTicket> list = dailyTrainTicketMapper.selectByExample(example);
+        if (CollUtil.isNotEmpty(list)) {
+            return list.get(0);
+        } else {
+            return null;
+        }
     }
 }

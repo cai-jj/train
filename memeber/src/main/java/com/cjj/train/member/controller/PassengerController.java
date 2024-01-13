@@ -3,6 +3,7 @@ package com.cjj.train.member.controller;
 import com.cjj.train.common.context.LoginMemberContext;
 import com.cjj.train.common.resp.CommonResp;
 import com.cjj.train.common.resp.PageResp;
+import com.cjj.train.member.domain.Passenger;
 import com.cjj.train.member.req.PassengerQueryReq;
 import com.cjj.train.member.req.PassengerSaveReq;
 import com.cjj.train.member.resp.PassengerQueryResp;
@@ -37,5 +38,11 @@ public class PassengerController {
     public CommonResp<Object> deleteById(@PathVariable("id") Long id) {
         passengerService.deleteById(id);
         return new CommonResp<>();
+    }
+
+    @GetMapping("/query-mine")
+    public CommonResp<List<Passenger>> queryMine() {
+        List<Passenger> list = passengerService.queryMine();
+        return new CommonResp<>(list);
     }
 }

@@ -69,4 +69,15 @@ public enum SeatColEnum {
         return colList;
     }
 
+    public static void main(String[] args) {
+        List<SeatColEnum> list = getColsByType("1");
+        System.out.println(list); //[YDZ_A, YDZ_C, YDZ_D, YDZ_F]
+        List<SeatColEnum> list2 = getColsByType("2");
+        System.out.println(list2); //[EDZ_A, EDZ_B, EDZ_C, EDZ_D, EDZ_F]
+        for (SeatColEnum seatColEnum : list) {
+            System.out.println(seatColEnum.getCode());
+        }
+
+    }
+
 }
